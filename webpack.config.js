@@ -1,0 +1,98 @@
+'use strict';
+const path = require('path');
+
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
+
+const mode = 'production';
+
+module.exports = {
+  entry: {
+    'sdcu1': ['scripts/app.ts'],
+  },
+
+  context: path.join(process.cwd(), 'src'),
+
+  output: {
+    publicPath: mode === 'production' ? '/' : 'http://localhost:8080/',
+    path: path.join(process.cwd(), 'dist'),
+    filename: 'scripts/[name].[hash].js',
+  },
+
+  mode,
+
+  module: {
+    rules: [
+      {
+        test: /\.ts$/,
+        loader: 'ts-loader',
+      },
+      {
+        test: /\.(css|sass|scss)$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+          },
+          {
+            loader: 'sass-loader',
+          },
+        ],
+      },
+    ],
+  },
+
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'public/index.html',
+      chunksSortMode: 'dependency',
+    }),
+
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].[hash].css',
+      chunkFilename: 'css/[id].[hash].css',
+    }),
+
+    new CopyWebpackPlugin([{ from: 'public' }]),
+
+    new webpack.WatchIgnorePlugin([
+      /\.js$/,
+      /\.d\.ts$/
+    ])
+
+  ],
+
+  resolve: {
+    modules: ['node_modules', path.resolve(process.cwd(), 'src')],
+    extensions: ['.ts', '.js', 'scss'],
+  },
+
+  devServer: {
+    contentBase: './dist',
+    clientLogLevel: 'info',
+    host: '192.168.1.10',
+    port: 8080,
+    inline: true,
+    historyApiFallback: false,
+    watchOptions: {
+      aggregateTimeout: 300,
+      poll: 500,
+    },
+  },
+
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          chunks: 'all',
+        },
+      },
+    },
+  },
+
+  devtool: 'inline-source-map',
+};
