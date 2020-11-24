@@ -16,7 +16,7 @@ module.exports = {
   context: path.join(process.cwd(), 'src'),
 
   output: {
-    publicPath: mode === 'production' ? '/' : 'http://localhost:8080/',
+    publicPath: mode === 'production' ? '' : 'http://localhost:8080/',
     path: path.join(process.cwd(), 'dist'),
     filename: 'scripts/[name].[hash].js',
   },
@@ -69,19 +69,6 @@ module.exports = {
     extensions: ['.ts', '.js', 'scss'],
   },
 
-  devServer: {
-    contentBase: './dist',
-    clientLogLevel: 'info',
-    host: '192.168.1.10',
-    port: 8080,
-    inline: true,
-    historyApiFallback: false,
-    watchOptions: {
-      aggregateTimeout: 300,
-      poll: 500,
-    },
-  },
-
   optimization: {
     splitChunks: {
       cacheGroups: {
@@ -93,6 +80,4 @@ module.exports = {
       },
     },
   },
-
-  devtool: 'inline-source-map',
 };

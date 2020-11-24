@@ -1,43 +1,43 @@
-import { Synth, Frequency, Time, Reverb } from 'tone';
+// import { Synth, Frequency, Time, Reverb } from 'tone';
 
-let audioInitialized = false;
-let synth: Synth;
-let explosionSynth: Synth;
-let collisionSynth: Synth;
+// let audioInitialized = false;
+// let synth: Synth;
+// let explosionSynth: Synth;
+// let collisionSynth: Synth;
 
-document.addEventListener('keydown', function(keyboardEvent: KeyboardEvent) {
-  if (!audioInitialized) {
-    audioInitialized = true;
-    // synth = createSynth();
-    // synth.toDestination();
-    // var reverb = new Reverb(2).toDestination();
-    // explosionSynth = createSynth();
-    // explosionSynth.connect(reverb);
-    // var collisionReverb = new Reverb(1.2).toDestination();
-    // collisionSynth = createSynth();
-    // collisionSynth.connect(collisionReverb);
-  }
-});
+// document.addEventListener('keydown', function(keyboardEvent: KeyboardEvent) {
+//   if (!audioInitialized) {
+//     audioInitialized = true;
+//     // synth = createSynth();
+//     // synth.toDestination();
+//     // var reverb = new Reverb(2).toDestination();
+//     // explosionSynth = createSynth();
+//     // explosionSynth.connect(reverb);
+//     // var collisionReverb = new Reverb(1.2).toDestination();
+//     // collisionSynth = createSynth();
+//     // collisionSynth.connect(collisionReverb);
+//   }
+// });
 
-function createSynth(): Synth {
-  return new Synth({
-    oscillator: {
-      //type: "amtriangle",
-      //harmonicity: 0.5,
-      modulationType: 'square', // "sine"
-    },
-    envelope: {
-      attackCurve: 'linear',
-      attack: 0.01,
-      decay: 0.01,
-      decayCurve: 'linear',
-      sustain: 0.0,
-      release: 0.01,
-      releaseCurve: 'linear',
-    },
-    portamento: 0.0,
-  });
-}
+// function createSynth(): Synth {
+//   return new Synth({
+//     oscillator: {
+//       //type: "amtriangle",
+//       //harmonicity: 0.5,
+//       modulationType: 'square', // "sine"
+//     },
+//     envelope: {
+//       attackCurve: 'linear',
+//       attack: 0.01,
+//       decay: 0.01,
+//       decayCurve: 'linear',
+//       sustain: 0.0,
+//       release: 0.01,
+//       releaseCurve: 'linear',
+//     },
+//     portamento: 0.0,
+//   });
+// }
 
 export function explosionSound() {
   // try {
