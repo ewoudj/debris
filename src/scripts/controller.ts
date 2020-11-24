@@ -18,6 +18,7 @@ export class Controller {
   private _touchable: boolean = 'createTouch' in document;
   private _touches?: TouchList;
   private _pauzeHandler: () => void;
+  private _isMacLike: boolean = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform);
 
   private gamepadConfiguration: { [label: string]: GamepadConfiguration } = {
     'USB Gamepad  (STANDARD GAMEPAD Vendor: 0079 Product: 0011)': {
@@ -202,7 +203,10 @@ export class Controller {
     if (keyboardEvent.key === 'ArrowRight') {
       this._rightKeyDown = true;
     }
-    if (keyboardEvent.key === 'Control') {
+    if (!this._isMacLike && keyboardEvent.key === 'Control') {
+      this._buttonDown = true;
+    }
+    if (this._isMacLike && keyboardEvent.key === 'Alt') {
       this._buttonDown = true;
     }
     if (
@@ -233,7 +237,10 @@ export class Controller {
     if (keyboardEvent.key === 'ArrowRight') {
       this._rightKeyDown = false;
     }
-    if (keyboardEvent.key === 'Control') {
+    if (!this._isMacLike && keyboardEvent.key === 'Control') {
+      this._buttonDown = false;
+    }
+    if (this._isMacLike && keyboardEvent.key === 'Alt') {
       this._buttonDown = false;
     }
     if (keyboardEvent.key.length == 1 && /^[a-z0-9]+$/i.test(keyboardEvent.key)) {
