@@ -6,7 +6,7 @@ import { Bullet } from './bullet';
 import { Body, Circle, Ellipse } from './body';
 import { Debris } from './debris';
 import { Explosion } from './explosion';
-import { laserSound, moveSound } from './audio';
+import { laserUfoSound, moveSound } from './audio';
 import { Ufo } from './ufo';
 import { Laser } from './laser';
 
@@ -100,7 +100,7 @@ export class Ship implements EntityInterface {
     if (this.bulletsRemaining && now - this.timeBulletLastFired > this.bulletInterval) {
       this.bulletsRemaining--;
       this.timeBulletLastFired = now;
-      laserSound();
+      laserUfoSound();
       this.game.entities.push(
         new Bullet(
           this.game,

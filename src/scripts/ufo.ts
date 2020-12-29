@@ -3,7 +3,7 @@ import { Game } from './game';
 import { Body, Circle } from './body';
 import { Bullet } from './bullet';
 import { Explosion } from './explosion';
-import { collisionSound, laserSound } from './audio';
+import { collisionSound, laserSound, ufoSound } from './audio';
 import { Debris } from './debris';
 import { Laser } from './laser';
 import { lineIntersection } from './math';
@@ -24,6 +24,7 @@ export class Ufo implements EntityInterface {
   private color: string;
   private lastUpdated: number;
   private timeLastFired: number;
+  private timeLastMadeSound: number;
 
   private readonly rects: Array<[number, number, number, number]> = [
     [-20, -4, 40, 5],
@@ -41,6 +42,7 @@ export class Ufo implements EntityInterface {
     this.color = color;
     this.lastUpdated = game.now;
     this.timeLastFired = game.now;
+    this.timeLastMadeSound = game.now;
   }
 
   update(now: number): void {
@@ -99,6 +101,10 @@ export class Ufo implements EntityInterface {
       }
     }
     this.lastUpdated = now;
+    if (now - this.timeLastMadeSound > 200) {
+      this.timeLastMadeSound = now;
+      ufoSound();
+    }
   }
 
   shoot(ship?: EntityInterface): [number, number] {

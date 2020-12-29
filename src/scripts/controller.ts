@@ -1,3 +1,5 @@
+import { afterInput } from './audio';
+
 export class Controller {
   private _direction: [number, number] = [0, 0];
   private _buttonDown: boolean = false;
@@ -50,11 +52,13 @@ export class Controller {
     if (this._touchable) {
       window.addEventListener('touchstart', this.onTouchStart.bind(this), false);
       window.addEventListener('touchmove', this.onTouchMove.bind(this), false);
+      window.addEventListener('touchcancel', this.onTouchEnd.bind(this), false);
       window.addEventListener('touchend', this.onTouchEnd.bind(this), false);
     }
   }
 
   onTouchStart(e: TouchEvent) {
+    afterInput();
     let foundLeft = false;
     let foundRight = false;
     for (var i = 0, l = e.touches.length; i < l; i++) {
@@ -190,6 +194,7 @@ export class Controller {
   }
 
   keyDownHandler(keyboardEvent: KeyboardEvent) {
+    afterInput();
     this.handleInterAction();
     if (keyboardEvent.key === 'ArrowUp') {
       this._upKeyDown = true;

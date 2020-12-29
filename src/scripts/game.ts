@@ -5,6 +5,7 @@ import { Controller } from './controller';
 import { DebrisField } from './debrisfield';
 import { Physics } from './physics';
 import { Hud } from './hud';
+import { startSound } from './audio';
 
 export class Game {
   readonly logicalWidth: number = 800;
@@ -119,6 +120,7 @@ export class Game {
     this.entities.push(new Hud(this));
     this.entities.push(new Ship(this));
     this.entities.push(new DebrisField(this));
+    startSound();
     //this.entities.push(new Debug(this));
   }
 }

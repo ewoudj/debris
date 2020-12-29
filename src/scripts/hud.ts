@@ -3,6 +3,7 @@ import { Game } from './game';
 import { Body } from './body';
 import { renderText } from './text';
 import { Ship } from './ship';
+import { endSound } from './audio';
 
 export class Hud implements EntityInterface {
   body?: Body;
@@ -54,6 +55,9 @@ export class Hud implements EntityInterface {
       if (now - this.animationLastUpdate > 50) {
         this.animationLastUpdate = now;
         this.animationIndex++;
+        if (Math.abs(this.animationIndex % 2) == 1) {
+          endSound();
+        }
         if (this.animationIndex > 11) {
           this.animationIndex = 5;
         }
