@@ -9,11 +9,14 @@ export function afterInput() {
     const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
     if (isSafari) {
       try {
+        startAudio.play();
         appearAudio.play();
         explosionAudio.play();
         laserAudio.play();
+        laserUfoAudio.play();
+        blipHi.play();
         blipLow.play();
-        blipLow.play();
+        collisionAudio.play();
       } catch (e) {}
     }
   }
