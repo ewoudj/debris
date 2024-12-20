@@ -1,56 +1,20 @@
 {
   "name": "debris",
-  "version": "0.0.1",
-  "description": "Space Debris Clean Up: it is a dirty job but someone's gotta do it.",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "clean": "rimraf dist",
-    "start": "webpack-dev-server --open --config webpack.dev.js",
-    "watch": "webpack --watch",
-    "format": "prettier --write \"{__tests__,src}/**/*.{js,ts,scss,html}\"",
-    "lint": "eslint \"**/*.ts\" -f eslint-formatter-friendly",
-    "prebuild": "npm run format",
-    "pretest": "npm run lint",
-    "build": "npm run clean && webpack --config ./webpack.prod.js",
-    "test": "karma start --single-run --browsers ChromeHeadless",
-    "test-watch": "karma start --browsers ChromeHeadless",
-    "assets": "cd ./src/public && pwa-asset-generator ./icon.svg ./resources/images -i ./index.html -m ./manifest.json --background \"#000\""
+    "dev": "vite --port 3006",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "assets": "cd public && pwa-asset-generator icon.svg assets -i ../index.html -m manifest.json --background \"#000\" && sed -i '' 's|\"src\": \"public/assets/|\"src\": \"assets/|g' ./manifest.json"
   },
-  "license": "ISC",
   "devDependencies": {
-    "@types/jasmine": "^3.6.1",
-    "@typescript-eslint/eslint-plugin": "^2.34.0",
-    "@typescript-eslint/parser": "^2.34.0",
-    "copy-webpack-plugin": "^5.1.2",
-    "css-loader": "^3.6.0",
-    "eslint": "^6.5.1",
-    "eslint-config-prettier": "^6.15.0",
-    "eslint-formatter-friendly": "^7.0.0",
-    "eslint-plugin-prettier": "^3.1.4",
-    "html-webpack-plugin": "^3.2.0",
-    "jasmine": "^3.6.3",
-    "karma": "^4.3.0",
-    "karma-chrome-launcher": "^3.1.0",
-    "karma-jasmine": "^2.0.1",
-    "karma-sourcemap-loader": "^0.3.8",
-    "karma-webpack": "^4.0.2",
-    "mini-css-extract-plugin": "^0.8.0",
-    "node-sass": "^4.14.1",
-    "prettier": "^1.18.2",
-    "sass-loader": "^8.0.2",
-    "ts-loader": "^6.2.2",
-    "typescript": "^3.9.7",
-    "webpack": "^4.44.2",
-    "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0",
-    "webpack-merge": "^5.4.0"
-  },
-  "dependencies": {},
-  "engines": {
-    "node": ">=6.0.0"
-  },
-  "prettier": {
-    "printWidth": 100,
-    "singleQuote": true,
-    "trailingComma": "es5"
+    "@types/babel__traverse": "^7.20.6",
+    "@types/eslint": "^9.6.1",
+    "@types/node": "^22.10.2",
+    "@types/webpack-sources": "^3.2.3",
+    "typescript": "~5.6.2",
+    "vite": "^6.0.1"
   }
 }
